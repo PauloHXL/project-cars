@@ -16,5 +16,5 @@ app.use("/api/v1", carRoutes_1.default);
     db.exec("CREATE TABLE IF NOT EXISTS registrosCarros (id INTEGER PRIMARY KEY, placa VARCHAR(7) NOT NULL UNIQUE,chassi VARCHAR(17) NOT NULL UNIQUE, renavam VARCHAR(11) NOT NULL UNIQUE, marca VARCHAR(50) NOT NULL, modelo VARCHAR(50) NOT NULL, ano INT, created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP, updated_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP)");
 });
 app.listen(PORT, function () {
-    console.log("Server is running on http://localhost:".concat(PORT));
+    console.log("O servidor est\u00E1 rodando em http://localhost:".concat(PORT));
 });

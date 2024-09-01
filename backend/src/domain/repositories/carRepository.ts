@@ -14,15 +14,15 @@ export async function CriarRegistro(car: Car): Promise<number> {
       car.modelo,
       car.marca,
       car.ano,
-      created.toISOString(),
+      formatDate(created),
       null,
     ]
   );
 
   if (typeof result.lastID === "number") {
-    return result.lastID; // Retorne o ID do novo registro
+    return result.lastID;
   } else {
-    throw new Error("Failed to retrieve the ID of the new record");
+    throw new Error("Falha ao recuperar o ID do novo registro");
   }
 }
 
@@ -40,15 +40,20 @@ export async function BuscaRegistroPorId(id: number): Promise<Car | null> {
 //}
 
 export async function BuscaRegistros(
-  page: number,
-  limit: number
+  page?: number,
+  limit?: number
 ): Promise<Car[]> {
   const db = await openDb();
-  const offset = (page - 1) * limit;
-  return db.all("SELECT * FROM registrosCarros LIMIT ? OFFSET ?", [
-    limit,
-    offset,
-  ]);
+
+  if (page && limit) {
+    const offset = (page - 1) * limit;
+    return db.all("SELECT * FROM registrosCarros LIMIT ? OFFSET ?", [
+      limit,
+      offset,
+    ]);
+  } else {
+    return db.all("SELECT * FROM registrosCarros");
+  }
 }
 
 export async function AtualizaRegistro(id: number, car: Car): Promise<void> {

@@ -44,8 +44,8 @@ export async function TodosRegistros(
   res: Response
 ): Promise<void> {
   try {
-    const page = parseInt(req.query.page as string, 10) || 1;
-    const limit = parseInt(req.query.limit as string, 10) || 10;
+    const page = parseInt(req.query.page as string, 10) || undefined;
+    const limit = parseInt(req.query.limit as string, 10) || undefined;
 
     const { hasNext, data } = await buscaCarros(page, limit);
 
@@ -74,8 +74,8 @@ export async function AtualizaCampoRegistro(
 ): Promise<void> {
   try {
     const { id } = req.params;
-    const [campo] = Object.keys(req.body); // Pega o nome do campo a ser atualizado
-    const valor = req.body[campo]; // Pega o valor do campo a ser atualizado
+    const [campo] = Object.keys(req.body);
+    const valor = req.body[campo];
 
     await atualizaCampoCarro(Number(id), campo, valor);
     res.status(200).send(`Campo ${campo} atualizado com sucesso`);

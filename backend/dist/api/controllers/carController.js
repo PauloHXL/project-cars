@@ -99,8 +99,8 @@ function TodosRegistros(req, res) {
             switch (_b.label) {
                 case 0:
                     _b.trys.push([0, 2, , 3]);
-                    page = parseInt(req.query.page, 10) || 1;
-                    limit = parseInt(req.query.limit, 10) || 10;
+                    page = parseInt(req.query.page, 10) || undefined;
+                    limit = parseInt(req.query.limit, 10) || undefined;
                     return [4 /*yield*/, (0, carService_1.buscaCarros)(page, limit)];
                 case 1:
                     _a = _b.sent(), hasNext = _a.hasNext, data = _a.data;

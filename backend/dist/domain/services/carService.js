@@ -65,10 +65,12 @@ function buscaCarroPorId(id) {
 //
 function buscaCarros(page, limit) {
     return __awaiter(this, void 0, void 0, function () {
-        var totalRecords, carros, hasNext;
+        var totalRecords, carros, hasNext, carros;
         return __generator(this, function (_a) {
             switch (_a.label) {
-                case 0: return [4 /*yield*/, (0, carRepository_1.ContarRegistros)()];
+                case 0:
+                    if (!(page && limit)) return [3 /*break*/, 3];
+                    return [4 /*yield*/, (0, carRepository_1.ContarRegistros)()];
                 case 1:
                     totalRecords = _a.sent();
                     return [4 /*yield*/, (0, carRepository_1.BuscaRegistros)(page, limit)];
@@ -76,6 +78,10 @@ function buscaCarros(page, limit) {
                     carros = _a.sent();
                     hasNext = page * limit < totalRecords;
                     return [2 /*return*/, { hasNext: hasNext, data: carros }];
+                case 3: return [4 /*yield*/, (0, carRepository_1.BuscaRegistros)()];
+                case 4:
+                    carros = _a.sent();
+                    return [2 /*return*/, { hasNext: false, data: carros }];
             }
         });
     });

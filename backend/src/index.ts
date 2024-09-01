@@ -15,7 +15,7 @@ openDb().then((db) => {
 });
 
 app.listen(PORT, () => {
-  console.log(`Server is running on http://localhost:${PORT}`);
+  console.log(`O servidor está rodando em http://localhost:${PORT}`);
 });
 
 export { app };

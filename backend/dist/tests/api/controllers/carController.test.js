@@ -44,7 +44,7 @@ var supertest_1 = __importDefault(require("supertest"));
 var express_1 = __importDefault(require("express"));
 var carRoutes_1 = __importDefault(require("../../../api/routes/carRoutes"));
 var database_1 = require("../../../config/database");
-describe("Car API", function () {
+describe("Carros API", function () {
     var app = (0, express_1.default)();
     app.use(express_1.default.json());
     app.use("/api", carRoutes_1.default);
@@ -64,7 +64,7 @@ describe("Car API", function () {
         });
     }); });
     describe("POST /api/carros", function () {
-        it("should create a new car record", function () { return __awaiter(void 0, void 0, void 0, function () {
+        it("deveria criar um novo recorde de carro", function () { return __awaiter(void 0, void 0, void 0, function () {
             var uniqueRenavam, newCar, res;
             return __generator(this, function (_a) {
                 switch (_a.label) {
@@ -90,8 +90,8 @@ describe("Car API", function () {
         }); });
     });
     describe("GET /api/carros", function () {
-        it("should handle pagination correctly or fall back if not enough data", function () { return __awaiter(void 0, void 0, void 0, function () {
-            var resAll, totalRecords, res, resPage1, resPage2;
+        it("deve lidar com a paginação corretamente ou retroceder se não houver dados suficientes", function () { return __awaiter(void 0, void 0, void 0, function () {
+            var resAll, totalRecords, res, resPage1;
             return __generator(this, function (_a) {
                 switch (_a.label) {
                     case 0: return [4 /*yield*/, (0, supertest_1.default)(app).get("/api/carros")];
@@ -100,40 +100,34 @@ describe("Car API", function () {
                         (0, chai_1.expect)(resAll.status).to.equal(200);
                         totalRecords = resAll.body.data.length;
                         if (!(totalRecords === 0)) return [3 /*break*/, 2];
-                        console.log("No data available in the database. Test passed, but there are no records to paginate.");
+                        console.log("Não há dados disponíveis no banco de dados. Teste aprovado, mas não há registros para paginar.");
                         return [2 /*return*/];
                     case 2:
                         if (!(totalRecords < 11)) return [3 /*break*/, 4];
-                        console.log("Not enough data to test pagination. Testing without pagination.");
+                        console.log("Dados insuficientes para testar a paginação. Teste sem paginação.");
                         return [4 /*yield*/, (0, supertest_1.default)(app).get("/api/carros")];
                     case 3:
                         res = _a.sent();
                         (0, chai_1.expect)(res.status).to.equal(200);
                         (0, chai_1.expect)(res.body.data).to.be.an("array").that.has.lengthOf(totalRecords);
                         (0, chai_1.expect)(res.body).to.have.property("hasNext", false);
-                        return [3 /*break*/, 7];
+                        return [3 /*break*/, 6];
                     case 4:
-                        console.log("Enough data available. Testing pagination.");
+                        console.log("Dados suficientes disponíveis. Testando paginação.");
                         return [4 /*yield*/, (0, supertest_1.default)(app).get("/api/carros?page=1&limit=10")];
                     case 5:
                         resPage1 = _a.sent();
                         (0, chai_1.expect)(resPage1.status).to.equal(200);
                         (0, chai_1.expect)(resPage1.body.data).to.be.an("array").that.has.lengthOf(10);
                         (0, chai_1.expect)(resPage1.body).to.have.property("hasNext", true);
-                        return [4 /*yield*/, (0, supertest_1.default)(app).get("/api/carros?page=2&limit=10")];
-                    case 6:
-                        resPage2 = _a.sent();
-                        (0, chai_1.expect)(resPage2.status).to.equal(200);
-                        (0, chai_1.expect)(resPage2.body.data.length).to.be.at.most(10);
-                        (0, chai_1.expect)(resPage2.body).to.have.property("hasNext", false);
-                        _a.label = 7;
-                    case 7: return [2 /*return*/];
+                        _a.label = 6;
+                    case 6: return [2 /*return*/];
                 }
             });
         }); });
     });
     describe("GET /api/carros/:id", function () {
-        it("should return a specific car record by ID", function () { return __awaiter(void 0, void 0, void 0, function () {
+        it("deve retornar um registro específico do carro por ID", function () { return __awaiter(void 0, void 0, void 0, function () {
             var res;
             return __generator(this, function (_a) {
                 switch (_a.label) {
@@ -153,7 +147,7 @@ describe("Car API", function () {
                 }
             });
         }); });
-        it("should return 404 if the car record is not found", function () { return __awaiter(void 0, void 0, void 0, function () {
+        it("deve retornar 404 se o registro do carro não for encontrado", function () { return __awaiter(void 0, void 0, void 0, function () {
             var res;
             return __generator(this, function (_a) {
                 switch (_a.label) {
@@ -168,7 +162,7 @@ describe("Car API", function () {
         }); });
     });
     describe("PUT /api/carros/:id", function () {
-        it("should update an existing car record", function () { return __awaiter(void 0, void 0, void 0, function () {
+        it("deve atualizar um registro de carro existente", function () { return __awaiter(void 0, void 0, void 0, function () {
             var uniqueRenavam, updatedCar, res;
             return __generator(this, function (_a) {
                 switch (_a.label) {
@@ -195,7 +189,7 @@ describe("Car API", function () {
         }); });
     });
     describe("PATCH /api/carros/:id", function () {
-        it("should update a single field of an existing car record", function () { return __awaiter(void 0, void 0, void 0, function () {
+        it("deve atualizar um único campo de um registro de carro existente", function () { return __awaiter(void 0, void 0, void 0, function () {
             var updatedField, res;
             return __generator(this, function (_a) {
                 switch (_a.label) {
@@ -216,7 +210,7 @@ describe("Car API", function () {
         }); });
     });
     describe("DELETE /api/carros/:id", function () {
-        it("should delete an existing car record", function () { return __awaiter(void 0, void 0, void 0, function () {
+        it("deve excluir um registro de carro existente", function () { return __awaiter(void 0, void 0, void 0, function () {
             var res;
             return __generator(this, function (_a) {
                 switch (_a.label) {

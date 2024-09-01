@@ -22,15 +22,20 @@ export async function buscaCarroPorId(id: number): Promise<Car | null> {
 //
 
 export async function buscaCarros(
-  page: number,
-  limit: number
+  page?: number,
+  limit?: number
 ): Promise<{ data: Car[]; hasNext: boolean }> {
-  const totalRecords = await ContarRegistros();
-  const carros = await BuscaRegistros(page, limit);
+  if (page && limit) {
+    const totalRecords = await ContarRegistros();
+    const carros = await BuscaRegistros(page, limit);
 
-  const hasNext = page * limit < totalRecords;
+    const hasNext = page * limit < totalRecords;
 
-  return { hasNext, data: carros };
+    return { hasNext, data: carros };
+  } else {
+    const carros = await BuscaRegistros();
+    return { hasNext: false, data: carros };
+  }
 }
 
 export async function atualizaCarro(id: number, car: Car): Promise<void> {

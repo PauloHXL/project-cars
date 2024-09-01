@@ -60,16 +60,16 @@ function CriarRegistro(car) {
                             car.modelo,
                             car.marca,
                             car.ano,
-                            created.toISOString(),
+                            formatDate(created),
                             null,
                         ])];
                 case 2:
                     result = _a.sent();
                     if (typeof result.lastID === "number") {
-                        return [2 /*return*/, result.lastID]; // Retorne o ID do novo registro
+                        return [2 /*return*/, result.lastID];
                     }
                     else {
-                        throw new Error("Failed to retrieve the ID of the new record");
+                        throw new Error("Falha ao recuperar o ID do novo registro");
                     }
                     return [2 /*return*/];
             }
@@ -106,11 +106,17 @@ function BuscaRegistros(page, limit) {
                 case 0: return [4 /*yield*/, (0, database_1.openDb)()];
                 case 1:
                     db = _a.sent();
-                    offset = (page - 1) * limit;
-                    return [2 /*return*/, db.all("SELECT * FROM registrosCarros LIMIT ? OFFSET ?", [
-                            limit,
-                            offset,
-                        ])];
+                    if (page && limit) {
+                        offset = (page - 1) * limit;
+                        return [2 /*return*/, db.all("SELECT * FROM registrosCarros LIMIT ? OFFSET ?", [
+                                limit,
+                                offset,
+                            ])];
+                    }
+                    else {
+                        return [2 /*return*/, db.all("SELECT * FROM registrosCarros")];
+                    }
+                    return [2 /*return*/];
             }
         });
     });

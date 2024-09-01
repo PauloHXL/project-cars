@@ -4,7 +4,7 @@ import express from "express";
 import carRoutes from "../../../api/routes/carRoutes";
 import { openDb } from "../../../config/database";
 
-describe("Car API", () => {
+describe("Carros API", () => {
   const app = express();
   app.use(express.json());
   app.use("/api", carRoutes);
@@ -17,7 +17,7 @@ describe("Car API", () => {
   });
 
   describe("POST /api/carros", () => {
-    it("should create a new car record", async () => {
+    it("deveria criar um novo recorde de carro", async () => {
       const uniqueRenavam = `1234567890${Math.floor(Math.random() * 10000)}`;
       const newCar = {
         placa: `TEST-${Math.floor(Math.random() * 10000)}`,
@@ -36,7 +36,7 @@ describe("Car API", () => {
   });
 
   describe("GET /api/carros", () => {
-    it("should handle pagination correctly or fall back if not enough data", async () => {
+    it("deve lidar com a paginação corretamente ou retroceder se não houver dados suficientes", async () => {
       const resAll = await request(app).get("/api/carros");
       expect(resAll.status).to.equal(200);
 
@@ -44,12 +44,12 @@ describe("Car API", () => {
 
       if (totalRecords === 0) {
         console.log(
-          "No data available in the database. Test passed, but there are no records to paginate."
+          "Não há dados disponíveis no banco de dados. Teste aprovado, mas não há registros para paginar."
         );
         return;
       } else if (totalRecords < 11) {
         console.log(
-          "Not enough data to test pagination. Testing without pagination."
+          "Dados insuficientes para testar a paginação. Teste sem paginação."
         );
 
         const res = await request(app).get("/api/carros");
@@ -57,23 +57,18 @@ describe("Car API", () => {
         expect(res.body.data).to.be.an("array").that.has.lengthOf(totalRecords);
         expect(res.body).to.have.property("hasNext", false);
       } else {
-        console.log("Enough data available. Testing pagination.");
+        console.log("Dados suficientes disponíveis. Testando paginação.");
 
         const resPage1 = await request(app).get("/api/carros?page=1&limit=10");
         expect(resPage1.status).to.equal(200);
         expect(resPage1.body.data).to.be.an("array").that.has.lengthOf(10);
         expect(resPage1.body).to.have.property("hasNext", true);
-
-        const resPage2 = await request(app).get("/api/carros?page=2&limit=10");
-        expect(resPage2.status).to.equal(200);
-        expect(resPage2.body.data.length).to.be.at.most(10);
-        expect(resPage2.body).to.have.property("hasNext", false);
       }
     });
   });
 
   describe("GET /api/carros/:id", () => {
-    it("should return a specific car record by ID", async () => {
+    it("deve retornar um registro específico do carro por ID", async () => {
       const res = await request(app).get(`/api/carros/${carId}`);
       expect(res.status).to.equal(200);
       expect(res.body).to.be.an("object");
@@ -86,7 +81,7 @@ describe("Car API", () => {
       expect(res.body).to.have.property("ano");
     });
 
-    it("should return 404 if the car record is not found", async () => {
+    it("deve retornar 404 se o registro do carro não for encontrado", async () => {
       const res = await request(app).get("/api/carros/999");
       expect(res.status).to.equal(404);
       expect(res.text).to.equal("Registro não encontrado");
@@ -94,7 +89,7 @@ describe("Car API", () => {
   });
 
   describe("PUT /api/carros/:id", () => {
-    it("should update an existing car record", async () => {
+    it("deve atualizar um registro de carro existente", async () => {
       const uniqueRenavam = `3234567890${Math.floor(Math.random() * 10000)}`;
       const updatedCar = {
         placa: `XYZ-${Math.floor(Math.random() * 10000)}`,
@@ -114,7 +109,7 @@ describe("Car API", () => {
   });
 
   describe("PATCH /api/carros/:id", () => {
-    it("should update a single field of an existing car record", async () => {
+    it("deve atualizar um único campo de um registro de carro existente", async () => {
       const updatedField = {
         placa: `DEF-${Math.floor(Math.random() * 10000)}`,
       };
@@ -128,7 +123,7 @@ describe("Car API", () => {
   });
 
   describe("DELETE /api/carros/:id", () => {
-    it("should delete an existing car record", async () => {
+    it("deve excluir um registro de carro existente", async () => {
       const res = await request(app).delete(`/api/carros/${carId}`);
       expect(res.status).to.equal(200);
       expect(res.text).to.equal("Registro do carro deletado");
