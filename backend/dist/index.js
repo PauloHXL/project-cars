@@ -13,7 +13,7 @@ var PORT = process.env.PORT || 3001;
 app.use(express_1.default.json());
 app.use("/api/v1", carRoutes_1.default);
 (0, database_1.openDb)().then(function (db) {
-    db.exec("CREATE TABLE IF NOT EXISTS users (id INTEGER PRIMARY KEY, placa VARCHAR(7) NOT NULL UNIQUE,chassi VARCHAR(17) NOT NULL UNIQUE, renavam VARCHAR(11) NOT NULL UNIQUE, marca VARCHAR(50) NOT NULL, modelo VARCHAR(50) NOT NULL, ano INT, created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP, updated_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP)");
+    db.exec("CREATE TABLE IF NOT EXISTS registrosCarros (id INTEGER PRIMARY KEY, placa VARCHAR(7) NOT NULL UNIQUE,chassi VARCHAR(17) NOT NULL UNIQUE, renavam VARCHAR(11) NOT NULL UNIQUE, marca VARCHAR(50) NOT NULL, modelo VARCHAR(50) NOT NULL, ano INT, created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP, updated_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP)");
 });
 app.listen(PORT, function () {
     console.log("Server is running on http://localhost:".concat(PORT));

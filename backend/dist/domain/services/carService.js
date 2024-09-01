@@ -36,14 +36,55 @@ var __generator = (this && this.__generator) || function (thisArg, body) {
     }
 };
 Object.defineProperty(exports, "__esModule", { value: true });
-exports.addCar = addCar;
-exports.fetchCar = fetchCar;
+exports.adicionaCarro = adicionaCarro;
+exports.buscaCarroPorId = buscaCarroPorId;
+exports.buscaCarros = buscaCarros;
+exports.atualizaCarro = atualizaCarro;
+exports.atualizaCampoCarro = atualizaCampoCarro;
+exports.deletaCarro = deletaCarro;
 var carRepository_1 = require("../repositories/carRepository");
-function addCar(car) {
+function adicionaCarro(car) {
     return __awaiter(this, void 0, void 0, function () {
         return __generator(this, function (_a) {
             switch (_a.label) {
                 case 0: return [4 /*yield*/, (0, carRepository_1.CriarRegistro)(car)];
+                case 1: return [2 /*return*/, _a.sent()];
+            }
+        });
+    });
+}
+function buscaCarroPorId(id) {
+    return __awaiter(this, void 0, void 0, function () {
+        return __generator(this, function (_a) {
+            return [2 /*return*/, (0, carRepository_1.BuscaRegistroPorId)(id)];
+        });
+    });
+}
+//xport async function buscaCarros(): Promise<Car[]> {
+// return TodosRegistros();
+//
+function buscaCarros(page, limit) {
+    return __awaiter(this, void 0, void 0, function () {
+        var totalRecords, carros, hasNext;
+        return __generator(this, function (_a) {
+            switch (_a.label) {
+                case 0: return [4 /*yield*/, (0, carRepository_1.ContarRegistros)()];
+                case 1:
+                    totalRecords = _a.sent();
+                    return [4 /*yield*/, (0, carRepository_1.BuscaRegistros)(page, limit)];
+                case 2:
+                    carros = _a.sent();
+                    hasNext = page * limit < totalRecords;
+                    return [2 /*return*/, { hasNext: hasNext, data: carros }];
+            }
+        });
+    });
+}
+function atualizaCarro(id, car) {
+    return __awaiter(this, void 0, void 0, function () {
+        return __generator(this, function (_a) {
+            switch (_a.label) {
+                case 0: return [4 /*yield*/, (0, carRepository_1.AtualizaRegistro)(id, car)];
                 case 1:
                     _a.sent();
                     return [2 /*return*/];
@@ -51,10 +92,27 @@ function addCar(car) {
         });
     });
 }
-function fetchCar() {
+function atualizaCampoCarro(id, campo, valor) {
     return __awaiter(this, void 0, void 0, function () {
         return __generator(this, function (_a) {
-            return [2 /*return*/, (0, carRepository_1.TodosRegistros)()];
+            switch (_a.label) {
+                case 0: return [4 /*yield*/, (0, carRepository_1.AtualizaCampo)(id, campo, valor)];
+                case 1:
+                    _a.sent();
+                    return [2 /*return*/];
+            }
+        });
+    });
+}
+function deletaCarro(id) {
+    return __awaiter(this, void 0, void 0, function () {
+        return __generator(this, function (_a) {
+            switch (_a.label) {
+                case 0: return [4 /*yield*/, (0, carRepository_1.DeletaRegistro)(id)];
+                case 1:
+                    _a.sent();
+                    return [2 /*return*/];
+            }
         });
     });
 }

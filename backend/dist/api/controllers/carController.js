@@ -37,23 +37,55 @@ var __generator = (this && this.__generator) || function (thisArg, body) {
 };
 Object.defineProperty(exports, "__esModule", { value: true });
 exports.CriarRegistro = CriarRegistro;
+exports.RegistroPorId = RegistroPorId;
 exports.TodosRegistros = TodosRegistros;
+exports.AtualizaRegistro = AtualizaRegistro;
+exports.AtualizaCampoRegistro = AtualizaCampoRegistro;
+exports.DeletaRegistro = DeletaRegistro;
 var carService_1 = require("../../domain/services/carService");
 function CriarRegistro(req, res) {
     return __awaiter(this, void 0, void 0, function () {
-        var error_1;
+        var id, error_1;
         return __generator(this, function (_a) {
             switch (_a.label) {
                 case 0:
                     _a.trys.push([0, 2, , 3]);
-                    return [4 /*yield*/, (0, carService_1.addCar)(req.body)];
+                    return [4 /*yield*/, (0, carService_1.adicionaCarro)(req.body)];
                 case 1:
-                    _a.sent();
-                    res.status(201).send("Registro do carro criado");
+                    id = _a.sent();
+                    res.status(201).json({ message: "Registro do carro criado", id: id });
                     return [3 /*break*/, 3];
                 case 2:
                     error_1 = _a.sent();
+                    console.error("Erro ao criar registro:", error_1);
                     res.status(500).send(error_1.message);
+                    return [3 /*break*/, 3];
+                case 3: return [2 /*return*/];
+            }
+        });
+    });
+}
+function RegistroPorId(req, res) {
+    return __awaiter(this, void 0, void 0, function () {
+        var id, carro, error_2;
+        return __generator(this, function (_a) {
+            switch (_a.label) {
+                case 0:
+                    _a.trys.push([0, 2, , 3]);
+                    id = req.params.id;
+                    return [4 /*yield*/, (0, carService_1.buscaCarroPorId)(Number(id))];
+                case 1:
+                    carro = _a.sent();
+                    if (carro) {
+                        res.json(carro);
+                    }
+                    else {
+                        res.status(404).send("Registro não encontrado");
+                    }
+                    return [3 /*break*/, 3];
+                case 2:
+                    error_2 = _a.sent();
+                    res.status(500).send(error_2.message);
                     return [3 /*break*/, 3];
                 case 3: return [2 /*return*/];
             }
@@ -62,19 +94,89 @@ function CriarRegistro(req, res) {
 }
 function TodosRegistros(req, res) {
     return __awaiter(this, void 0, void 0, function () {
-        var cars, error_2;
+        var page, limit, _a, hasNext, data, error_3;
+        return __generator(this, function (_b) {
+            switch (_b.label) {
+                case 0:
+                    _b.trys.push([0, 2, , 3]);
+                    page = parseInt(req.query.page, 10) || 1;
+                    limit = parseInt(req.query.limit, 10) || 10;
+                    return [4 /*yield*/, (0, carService_1.buscaCarros)(page, limit)];
+                case 1:
+                    _a = _b.sent(), hasNext = _a.hasNext, data = _a.data;
+                    res.json({ hasNext: hasNext, data: data });
+                    return [3 /*break*/, 3];
+                case 2:
+                    error_3 = _b.sent();
+                    res.status(500).send(error_3.message);
+                    return [3 /*break*/, 3];
+                case 3: return [2 /*return*/];
+            }
+        });
+    });
+}
+function AtualizaRegistro(req, res) {
+    return __awaiter(this, void 0, void 0, function () {
+        var id, error_4;
         return __generator(this, function (_a) {
             switch (_a.label) {
                 case 0:
                     _a.trys.push([0, 2, , 3]);
-                    return [4 /*yield*/, (0, carService_1.fetchCar)()];
+                    id = req.params.id;
+                    return [4 /*yield*/, (0, carService_1.atualizaCarro)(Number(id), req.body)];
                 case 1:
-                    cars = _a.sent();
-                    res.json(cars);
+                    _a.sent();
+                    res.status(200).send("Registro do carro atualizado");
                     return [3 /*break*/, 3];
                 case 2:
-                    error_2 = _a.sent();
-                    res.status(500).send(error_2.message);
+                    error_4 = _a.sent();
+                    res.status(500).send(error_4.message);
+                    return [3 /*break*/, 3];
+                case 3: return [2 /*return*/];
+            }
+        });
+    });
+}
+function AtualizaCampoRegistro(req, res) {
+    return __awaiter(this, void 0, void 0, function () {
+        var id, campo, valor, error_5;
+        return __generator(this, function (_a) {
+            switch (_a.label) {
+                case 0:
+                    _a.trys.push([0, 2, , 3]);
+                    id = req.params.id;
+                    campo = Object.keys(req.body)[0];
+                    valor = req.body[campo];
+                    return [4 /*yield*/, (0, carService_1.atualizaCampoCarro)(Number(id), campo, valor)];
+                case 1:
+                    _a.sent();
+                    res.status(200).send("Campo ".concat(campo, " atualizado com sucesso"));
+                    return [3 /*break*/, 3];
+                case 2:
+                    error_5 = _a.sent();
+                    res.status(500).send(error_5.message);
+                    return [3 /*break*/, 3];
+                case 3: return [2 /*return*/];
+            }
+        });
+    });
+}
+function DeletaRegistro(req, res) {
+    return __awaiter(this, void 0, void 0, function () {
+        var id, error_6;
+        return __generator(this, function (_a) {
+            switch (_a.label) {
+                case 0:
+                    _a.trys.push([0, 2, , 3]);
+                    id = req.params.id;
+                    return [4 /*yield*/, (0, carService_1.deletaCarro)(Number(id))];
+                case 1:
+                    _a.sent();
+                    res.status(200).send("Registro do carro deletado");
+                    return [3 /*break*/, 3];
+                case 2:
+                    error_6 = _a.sent();
+                    res.status(500).send(error_6.message);
                     return [3 /*break*/, 3];
                 case 3: return [2 /*return*/];
             }
