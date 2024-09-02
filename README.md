@@ -69,5 +69,14 @@ Este projeto frontend foi desenvolvido em Angular 16 e fornece uma interface int
 
 Toda a interação com os dados é feita através de chamadas aos endpoints REST do projeto backend, garantindo uma integração eficiente entre as camadas da aplicação.
 
-**Lista dos registros**
+**Lista dos registros:**
 ![Interface da Aplicação](imagens/img1.png)
+
+**Criação de registro:**
+![Interface da Aplicação](imagens/img2.png)
+
+**Edição de registro:**
+![Interface da Aplicação](imagens/img4.png)
+
+**Exclusão de registro:**
+![Interface da Aplicação](imagens/img3.png)
