@@ -126,7 +126,7 @@ function AtualizaRegistro(req, res) {
                     return [4 /*yield*/, (0, carService_1.atualizaCarro)(Number(id), req.body)];
                 case 1:
                     _a.sent();
-                    res.status(200).send("Registro do carro atualizado");
+                    res.status(200).send({ message: "Registro do carro atualizado" });
                     return [3 /*break*/, 3];
                 case 2:
                     error_4 = _a.sent();
@@ -172,7 +172,7 @@ function DeletaRegistro(req, res) {
                     return [4 /*yield*/, (0, carService_1.deletaCarro)(Number(id))];
                 case 1:
                     _a.sent();
-                    res.status(200).send("Registro do carro deletado");
+                    res.status(200).send({ message: "Registro do carro deletado" });
                     return [3 /*break*/, 3];
                 case 2:
                     error_6 = _a.sent();

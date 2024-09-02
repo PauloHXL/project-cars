@@ -1,0 +1,47 @@
+.form-container {
+  margin-top: 20px;
+  align-self: center;
+  padding: 20px;
+  background-color: #f5f5f5;
+  border-radius: 8px;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+  position: relative;
+  padding-bottom: 80px;
+  width: 60%;
+}
+
+mat-form-field {
+  width: 100%;
+  margin-bottom: 0px;
+}
+
+.fab-container {
+  position: absolute;
+  right: 16px;
+  bottom: 16px;
+  display: flex;
+  gap: 16px;
+}
+
+.fab-button {
+  width: 56px;
+  height: 56px;
+  border-radius: 8px;
+  min-width: 0;
+  min-height: 0;
+  padding: 0;
+  margin-top: 20px;
+}
+
+.fab-button mat-icon {
+  font-size: 24px;
+}
+
+.form-container p {
+  margin: 0;
+  padding: 0;
+}
+
+.add-button-container {
+  margin-bottom: 20px;
+}

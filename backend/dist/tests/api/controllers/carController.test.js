@@ -182,7 +182,9 @@ describe("Carros API", function () {
                     case 1:
                         res = _a.sent();
                         (0, chai_1.expect)(res.status).to.equal(200);
-                        (0, chai_1.expect)(res.text).to.equal("Registro do carro atualizado");
+                        (0, chai_1.expect)(res.body).to.deep.equal({
+                            message: "Registro do carro atualizado",
+                        });
                         return [2 /*return*/];
                 }
             });
@@ -218,7 +220,7 @@ describe("Carros API", function () {
                     case 1:
                         res = _a.sent();
                         (0, chai_1.expect)(res.status).to.equal(200);
-                        (0, chai_1.expect)(res.text).to.equal("Registro do carro deletado");
+                        (0, chai_1.expect)(res.body).to.deep.equal({ message: "Registro do carro deletado" });
                         return [2 /*return*/];
                 }
             });

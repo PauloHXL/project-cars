@@ -62,7 +62,7 @@ export async function AtualizaRegistro(
   try {
     const { id } = req.params;
     await atualizaCarro(Number(id), req.body);
-    res.status(200).send("Registro do carro atualizado");
+    res.status(200).send({ message: "Registro do carro atualizado" });
   } catch (error: any) {
     res.status(500).send(error.message);
   }
@@ -91,7 +91,7 @@ export async function DeletaRegistro(
   try {
     const { id } = req.params;
     await deletaCarro(Number(id));
-    res.status(200).send("Registro do carro deletado");
+    res.status(200).send({ message: "Registro do carro deletado" });
   } catch (error: any) {
     res.status(500).send(error.message);
   }

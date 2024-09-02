@@ -104,7 +104,9 @@ describe("Carros API", () => {
         .put(`/api/carros/${carId}`)
         .send(updatedCar);
       expect(res.status).to.equal(200);
-      expect(res.text).to.equal("Registro do carro atualizado");
+      expect(res.body).to.deep.equal({
+        message: "Registro do carro atualizado",
+      });
     });
   });
 
@@ -126,7 +128,7 @@ describe("Carros API", () => {
     it("deve excluir um registro de carro existente", async () => {
       const res = await request(app).delete(`/api/carros/${carId}`);
       expect(res.status).to.equal(200);
-      expect(res.text).to.equal("Registro do carro deletado");
+      expect(res.body).to.deep.equal({ message: "Registro do carro deletado" });
     });
   });
 });

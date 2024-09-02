@@ -1,0 +1,199 @@
+<mat-form-field>
+  <mat-label>Filtrar</mat-label>
+  <input matInput (keyup)="applyFilter($event)" placeholder="Ex. Gol" />
+</mat-form-field>
+
+<div class="add-button-container">
+  <button
+    mat-fab
+    color="primary"
+    (click)="openAddCarDialog()"
+    aria-label="Adicionar Registro"
+  >
+    <mat-icon>add</mat-icon>
+  </button>
+</div>
+
+<table mat-table [dataSource]="dataSource" class="mat-elevation-z8" matSort>
+  <!-- Placa Column -->
+  <ng-container matColumnDef="placa">
+    <th mat-header-cell *matHeaderCellDef mat-sort-header>Placa</th>
+    <td mat-cell *matCellDef="let carro" (click)="selectCar(carro)">
+      {{ carro.placa }}
+    </td>
+  </ng-container>
+
+  <!-- Chassi Column -->
+  <ng-container matColumnDef="chassi">
+    <th mat-header-cell *matHeaderCellDef mat-sort-header>Chassi</th>
+    <td mat-cell *matCellDef="let carro" (click)="selectCar(carro)">
+      {{ carro.chassi }}
+    </td>
+  </ng-container>
+
+  <!-- Renavam Column -->
+  <ng-container matColumnDef="renavam">
+    <th mat-header-cell *matHeaderCellDef mat-sort-header>Renavam</th>
+    <td mat-cell *matCellDef="let carro" (click)="selectCar(carro)">
+      {{ carro.renavam }}
+    </td>
+  </ng-container>
+
+  <!-- Marca Column -->
+  <ng-container matColumnDef="marca">
+    <th mat-header-cell *matHeaderCellDef mat-sort-header>Marca</th>
+    <td mat-cell *matCellDef="let carro" (click)="selectCar(carro)">
+      {{ carro.marca }}
+    </td>
+  </ng-container>
+
+  <!-- Modelo Column -->
+  <ng-container matColumnDef="modelo">
+    <th mat-header-cell *matHeaderCellDef mat-sort-header>Modelo</th>
+    <td mat-cell *matCellDef="let carro" (click)="selectCar(carro)">
+      {{ carro.modelo }}
+    </td>
+  </ng-container>
+
+  <!-- Ano Column -->
+  <ng-container matColumnDef="ano">
+    <th mat-header-cell *matHeaderCellDef mat-sort-header>Ano</th>
+    <td mat-cell *matCellDef="let carro" (click)="selectCar(carro)">
+      {{ carro.ano }}
+    </td>
+  </ng-container>
+
+  <!-- Created_at Column -->
+  <ng-container matColumnDef="created_at">
+    <th mat-header-cell *matHeaderCellDef mat-sort-header>Criado em</th>
+    <td mat-cell *matCellDef="let carro" (click)="selectCar(carro)">
+      {{ carro.created_at }}
+    </td>
+  </ng-container>
+
+  <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
+  <tr
+    mat-row
+    *matRowDef="let row; columns: displayedColumns"
+    (mouseover)="highlightRow($event)"
+    (mouseout)="resetRow($event)"
+    style="cursor: pointer; transition: background-color 0.3s ease"
+  ></tr>
+</table>
+
+<mat-paginator
+  [pageSizeOptions]="[5, 10, 20]"
+  showFirstLastButtons
+></mat-paginator>
+
+<!-- Formulário de exibição dos dados do carro selecionado -->
+<div *ngIf="selectedCar" class="form-container">
+  <p>
+    <mat-form-field appearance="fill">
+      <mat-label>Placa</mat-label>
+      <input matInput [(ngModel)]="selectedCar.placa" [readonly]="!isEditing" />
+    </mat-form-field>
+  </p>
+
+  <p>
+    <mat-form-field appearance="fill">
+      <mat-label>Chassi</mat-label>
+      <input
+        matInput
+        [(ngModel)]="selectedCar.chassi"
+        [readonly]="!isEditing"
+      />
+    </mat-form-field>
+  </p>
+
+  <p>
+    <mat-form-field appearance="fill">
+      <mat-label>Renavam</mat-label>
+      <input
+        matInput
+        [(ngModel)]="selectedCar.renavam"
+        [readonly]="!isEditing"
+      />
+    </mat-form-field>
+  </p>
+
+  <p>
+    <mat-form-field appearance="fill">
+      <mat-label>Marca</mat-label>
+      <input matInput [(ngModel)]="selectedCar.marca" [readonly]="!isEditing" />
+    </mat-form-field>
+  </p>
+
+  <p>
+    <mat-form-field appearance="fill">
+      <mat-label>Modelo</mat-label>
+      <input
+        matInput
+        [(ngModel)]="selectedCar.modelo"
+        [readonly]="!isEditing"
+      />
+    </mat-form-field>
+  </p>
+
+  <p>
+    <mat-form-field appearance="fill">
+      <mat-label>Ano</mat-label>
+      <input matInput [(ngModel)]="selectedCar.ano" [readonly]="!isEditing" />
+    </mat-form-field>
+  </p>
+
+  <p>
+    <mat-form-field appearance="fill">
+      <mat-label>Criado em</mat-label>
+      <input matInput [value]="selectedCar.created_at" readonly />
+    </mat-form-field>
+  </p>
+
+  <div class="fab-container">
+    <!-- Botão de Editar que só aparece se não estiver em modo de edição -->
+    <button
+      *ngIf="!isEditing"
+      mat-fab
+      color="primary"
+      (click)="toggleEdit()"
+      class="fab-button"
+      aria-label="Editar"
+    >
+      <mat-icon>edit</mat-icon>
+    </button>
+
+    <!-- Botões de Salvar e Cancelar que só aparecem em modo de edição -->
+    <button
+      *ngIf="isEditing"
+      mat-fab
+      color="primary"
+      (click)="saveEdit()"
+      class="fab-button"
+      aria-label="Salvar"
+    >
+      <mat-icon>check</mat-icon>
+    </button>
+    <button
+      *ngIf="isEditing"
+      mat-fab
+      color="warn"
+      (click)="cancelEdit()"
+      class="fab-button"
+      aria-label="Cancelar"
+    >
+      <mat-icon>close</mat-icon>
+    </button>
+
+    <!-- Botão de Deletar que só aparece se não estiver em modo de edição -->
+    <button
+      *ngIf="!isEditing"
+      mat-fab
+      color="warn"
+      (click)="confirmDeleteCar(selectedCar)"
+      class="fab-button"
+      aria-label="Deletar"
+    >
+      <mat-icon>delete</mat-icon>
+    </button>
+  </div>
+</div>

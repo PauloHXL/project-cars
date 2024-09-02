@@ -1,0 +1,31 @@
+<h1 mat-dialog-title>Adicionar Novo Carro</h1>
+<div mat-dialog-content>
+  <mat-form-field appearance="fill">
+    <mat-label>Placa</mat-label>
+    <input matInput [(ngModel)]="data.placa" />
+  </mat-form-field>
+  <mat-form-field appearance="fill">
+    <mat-label>Chassi</mat-label>
+    <input matInput [(ngModel)]="data.chassi" />
+  </mat-form-field>
+  <mat-form-field appearance="fill">
+    <mat-label>Renavam</mat-label>
+    <input matInput [(ngModel)]="data.renavam" />
+  </mat-form-field>
+  <mat-form-field appearance="fill">
+    <mat-label>Modelo</mat-label>
+    <input matInput [(ngModel)]="data.modelo" />
+  </mat-form-field>
+  <mat-form-field appearance="fill">
+    <mat-label>Marca</mat-label>
+    <input matInput [(ngModel)]="data.marca" />
+  </mat-form-field>
+  <mat-form-field appearance="fill">
+    <mat-label>Ano</mat-label>
+    <input matInput [(ngModel)]="data.ano" type="number" />
+  </mat-form-field>
+</div>
+<div mat-dialog-actions>
+  <button mat-button (click)="onNoClick()">Cancelar</button>
+  <button mat-button [mat-dialog-close]="data">Adicionar</button>
+</div>
