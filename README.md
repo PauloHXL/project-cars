@@ -63,4 +63,10 @@ Este endpoint permite a exclusão de um registro de carro identificado pelo seu 
 
 **DELETE** - `http://localhost:3001/api/v1/carros/{id}`
 
+# Frontend
+
+Este projeto frontend foi desenvolvido em Angular 16 e fornece uma interface intuitiva para a gestão de registros de carros. A aplicação permite ao usuário visualizar a lista completa de registros, selecionar um registro específico para edição ou exclusão, e adicionar novos registros. 
+
+Toda a interação com os dados é feita através de chamadas aos endpoints REST do projeto backend, garantindo uma integração eficiente entre as camadas da aplicação.
+
 
