@@ -2,13 +2,13 @@
 
 ## Projeto para o teste INFO SISTEMAS
 
-````markdown
+
 # Backend
 
 Este projeto consiste em uma aplicação Node.js desenvolvida com TypeScript, focada em manipulação de registros de carros. O projeto utiliza Mocha para testar todos os endpoints.
 
 A aplicação utiliza um banco de dados local SQLite, que já está incluído no projeto e pré-populado com dados de exemplo. Por questões de simplicidade e para demonstrar proficiência em SQL, optei por não utilizar um ORM como o Sequelize, apesar de ter experiência com ele. Todas as operações com o banco de dados são feitas diretamente via queries SQL.
-````
+
 ## Como Rodar o Projeto
 
 Para iniciar a aplicação:
@@ -66,7 +66,4 @@ Este endpoint permite a exclusão de um registro de carro identificado pelo seu 
 
 **DELETE** - `http://localhost:3001/api/v1/carros/{id}`
 
-```
 
-Essa versão está mais detalhada, clara e segue um formato comum para documentações de projetos no GitHub.
-```
