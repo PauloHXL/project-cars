@@ -11,8 +11,10 @@ A aplicação utiliza um banco de dados local SQLite, que já está incluído no
 Para iniciar a aplicação:
 
 ```bash
+cd .\backend\
 npm start
 ```
+
 Para rodar os testes:
 
 ```bash
@@ -65,22 +67,31 @@ Este endpoint permite a exclusão de um registro de carro identificado pelo seu 
 
 # Frontend
 
-Este projeto frontend foi desenvolvido em Angular 16 e fornece uma interface intuitiva para a gestão de registros de carros. A aplicação permite ao usuário visualizar a lista completa de registros, selecionar um registro específico para edição ou exclusão, e adicionar novos registros. 
+Este projeto frontend foi desenvolvido em Angular 16 e fornece uma interface intuitiva para a gestão de registros de carros. A aplicação permite ao usuário visualizar a lista completa de registros, selecionar um registro específico para edição ou exclusão, e adicionar novos registros.
 
 Toda a interação com os dados é feita através de chamadas aos endpoints REST do projeto backend, garantindo uma integração eficiente entre as camadas da aplicação.
 
-## Lista dos registros: ##
+## Como Rodar o Projeto
+
+Para iniciar a aplicação:
+
+```bash
+cd .\frontend\
+ng serve
+```
+
+## Lista dos registros:
 
 ![Interface da Aplicação](imagens/img1.png)
 
-## Criação de registro: ##
+## Criação de registro:
 
 ![Interface da Aplicação](imagens/img2.png)
 
-## Edição de registro: ##
+## Edição de registro:
 
 ![Interface da Aplicação](imagens/img4.png)
 
-## Exclusão de registro: ##
+## Exclusão de registro:
 
 ![Interface da Aplicação](imagens/img3.png)
