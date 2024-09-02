@@ -1,8 +1,5 @@
 # project-cars
 
-## Projeto para o teste INFO SISTEMAS
-
-
 # Backend
 
 Este projeto consiste em uma aplicação Node.js desenvolvida com TypeScript, focada em manipulação de registros de carros. O projeto utiliza Mocha para testar todos os endpoints.
